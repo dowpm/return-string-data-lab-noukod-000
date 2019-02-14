@@ -6,7 +6,7 @@
 </ul>
 
 <script type="text/javascript" charset="utf-8">
-  $(function(){
+  (function(){
     $('.js-info').on('click',function() {
       const id = $(this).data('id')//this.dataset.id
       let description; let inventory;
@@ -17,5 +17,5 @@
         $('#description-'+id).html(fullDescription)}
       )}
     )
-  });
+  })();
 </script>
