@@ -6,16 +6,19 @@
 </ul>
 
 <script type="text/javascript" charset="utf-8">
-  (function(){
-    $('.js-info').on('click',function() {
-      const id = $(this).data('id')//this.dataset.id
-      let description; let inventory;
-      $.get(`/products/${id}/description`, (data)=>description = data)
-      $.get(`/products/${id}/inventory`, (data)=>{
-        inventory = data === 'true' ? 'Available' : "Sold Out"
-        const fullDescription = `<p> ${description} </p> <p><strong>${inventory}</strong></p>`
-        $('#description-'+id).html(fullDescription)}
-      )}
-    )
-  })();
+$(function() {
+$(".js-info").on("click", function() {
+  var id = $(this).data("id");
+  $.get("/products/" + id + "/description", function(description) {
+    $.get("/products/" + id + "/inventory", function(inventory) {
+      var inventoryText = "<strong>Available</strong>";
+      if(inventory === "false"){
+        inventoryText = "<strong>Sold Out</strong>";
+      }
+      var descriptionText = "<p>" + description + "</p><p>" + inventoryText + "</p>";
+      $("#product-" + id).html(descriptionText);
+    });
+  });
+});
+});
 </script>
